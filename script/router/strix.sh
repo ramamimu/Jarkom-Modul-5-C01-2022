@@ -1,4 +1,8 @@
-iptables -t nat -A POSTROUTING -s 10.5.0.0/21 -o eth0 -j SNAT --to-source 192.168.122.25
+echo '
+nameserver 192.168.122.1
+' > /etc/resolv.conf
+
+iptables -t nat -A POSTROUTING -o eth0 -j SNAT --to-source 192.168.122.2 -s 10.10.0.0/20
 
 # A1
 route add -net 10.10.6.128 netmask 255.255.255.248 gw 10.10.6.145
