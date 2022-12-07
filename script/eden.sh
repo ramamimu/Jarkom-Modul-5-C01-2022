@@ -21,3 +21,6 @@ echo 'options {
 
 
 service bind9 restart
+
+# soal 3
+iptables -A INPUT -p icmp -m connlimit --connlimit-above 2 --connlimit-mask 0 -j DROP

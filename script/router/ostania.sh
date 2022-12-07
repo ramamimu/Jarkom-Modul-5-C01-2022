@@ -30,3 +30,14 @@ net.ipv4.ip_forward=1
 
 
 service isc-dhcp-relay restart
+
+# soal 5
+# iptables -A PREROUTING -t nat -p tcp -d 10.10.6.136/29 --dport 80 -j DNAT --to-destination 10.10.6.138:80
+# iptables -A PREROUTING -t nat -p tcp -d 10.10.6.136/29 --dport 80 -m statistic --mode nth --every 2 --packet 0 -j DNAT --to-destination  10.10.6.139:80
+# iptables -t nat -A PREROUTING -p tcp -d 10.10.6.139 -m statistic --mode nth --every 2 --packet 0 -j DNAT --to-destination 10.10.6.138:80
+# iptables -t nat -A PREROUTING -p tcp -d 10.10.6.138 -m statistic --mode nth --every 2 --packet 0 -j DNAT --to-destination 10.10.6.139:443
+# iptables -t nat -A PREROUTING -p tcp -d 10.10.6.139 -m statistic --mode nth --every 2 --packet 0 -j DNAT --to-destination 10.10.6.139:80
+# iptables -t nat -A PREROUTING -p tcp -d 10.10.6.139 -j DNAT --to-destination 10.10.6.138:80
+# iptables -t nat -A PREROUTING -p tcp -d 10.10.6.139 -j DNAT --to-destination 10.10.6.139:80
+# iptables -t nat -A PREROUTING -d 10.10.6.136 -m state --state NEW -m statistic --mode nth --every 2 --packet 0 -j DNAT --to-destination 10.10.6.138
+# iptables -t nat -A PREROUTING -d 10.10.6.136 -j DNAT --to-destination 10.10.6.139

@@ -2,6 +2,7 @@ echo '
 nameserver 192.168.122.1
 ' > /etc/resolv.conf
 
+# soal 1
 iptables -t nat -A POSTROUTING -o eth0 -j SNAT --to-source 192.168.122.2 -s 10.10.0.0/20
 
 # A1
@@ -43,3 +44,7 @@ net.ipv4.ip_forward=1
 ' > /etc/sysctl.conf
 
 service isc-dhcp-relay restart
+
+# soal 2
+# iptables -A FORWARD -d 10.10.6.128 -i eth0 -p udp DROP
+# iptables -A FORWARD -d 10.10.6.128 -i eth0 -p tcp -j DROP

@@ -58,3 +58,9 @@ subnet 10.10.7.0 netmask 255.255.255.0 {
 ' > /etc/dhcp/dhcpd.conf
 
 service isc-dhcp-server restart
+
+apt-get update
+apt-get install netcat -y
+
+# soal 3
+iptables -A INPUT -p icmp -m connlimit --connlimit-above 2 --connlimit-mask 0 -j DROP
