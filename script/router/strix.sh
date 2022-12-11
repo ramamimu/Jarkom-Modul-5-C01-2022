@@ -46,5 +46,6 @@ net.ipv4.ip_forward=1
 service isc-dhcp-relay restart
 
 # soal 2
-# iptables -A FORWARD -d 10.10.6.128 -i eth0 -p udp DROP
-# iptables -A FORWARD -d 10.10.6.128 -i eth0 -p tcp -j DROP
+iptables -A FORWARD -s 10.10.0.0/21 -j ACCEPT
+iptables -A FORWARD -p tcp -j DROP
+iptables -A FORWARD -p udp -j DROP
